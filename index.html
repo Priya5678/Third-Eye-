@@ -81,7 +81,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .brand-top {
@@ -116,13 +116,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .eye-socket {
-            width: 90px;
-            height: 52px;
-            background: #fff;
+            width: 96px;
+            height: 54px;
+            background: #ffffff;
             border-radius: 50px 50px 50px 50px / 32px 32px 32px 32px;
             position: relative;
             overflow: hidden;
@@ -134,8 +134,8 @@
         }
 
         .iris {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: radial-gradient(circle, #f97316 0%, #dc2743 45%, #701a75 80%, #000 100%);
             position: absolute;
@@ -143,7 +143,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 0 8px rgba(220, 39, 67, 0.8);
-            transition: transform 0.1s ease-out;
+            transition: transform 0.08s ease-out;
         }
 
         .pupil {
@@ -164,28 +164,26 @@
             left: 3px;
         }
 
-        /* Eyelids for Blinking Animation */
         .eyelid-top, .eyelid-bottom {
             position: absolute;
             left: 0;
             width: 100%;
             background: #140920;
             z-index: 5;
-            transition: height 0.15s ease-in-out;
         }
 
         .eyelid-top {
             top: 0;
             height: 0;
             border-bottom: 2px solid #581c87;
-            animation: blinkTop 4s infinite;
+            animation: blinkTop 4.5s infinite;
         }
 
         .eyelid-bottom {
             bottom: 0;
             height: 0;
             border-top: 2px solid #581c87;
-            animation: blinkBottom 4s infinite;
+            animation: blinkBottom 4.5s infinite;
         }
 
         @keyframes blinkTop {
@@ -198,7 +196,7 @@
             95% { height: 50%; }
         }
 
-        /* Screens */
+        /* Screen Views */
         .screen-view {
             animation: fadeIn 0.3s ease;
         }
@@ -243,7 +241,6 @@
             border-color: var(--accent-pink);
             background: rgba(236, 72, 153, 0.12);
             transform: translateX(3px);
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.2);
         }
 
         .srv-left {
@@ -287,7 +284,7 @@
             border: 1px solid #3d1b46;
         }
 
-        /* Form Controls */
+        /* Form Styling */
         .selected-service-pill {
             display: flex;
             align-items: center;
@@ -341,7 +338,8 @@
             font-size: 14px;
         }
 
-        input {
+        /* Auto-lowercase input style */
+        input.lowercase-input {
             width: 100%;
             padding: 12px 14px 12px 42px;
             background: #140920;
@@ -350,10 +348,11 @@
             color: #fff;
             font-size: 13px;
             outline: none;
+            text-transform: lowercase;
             transition: all 0.3s;
         }
 
-        input:focus {
+        input.lowercase-input:focus {
             border-color: var(--accent-pink);
             box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
         }
@@ -369,12 +368,37 @@
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(220, 39, 67, 0.4);
+        }
+
+        /* Target Profile Preview Card */
+        .profile-stat-box {
+            background: #140920;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item span {
+            font-size: 10px;
+            color: var(--text-sub);
+            display: block;
+        }
+
+        .stat-item b {
+            font-size: 13px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Step Card */
@@ -536,7 +560,7 @@
             color: #fff;
         }
 
-        /* Bottom Footer */
+        /* Footer */
         .footer {
             text-align: center;
             margin-top: 18px;
@@ -554,14 +578,14 @@
 <body>
 
     <div class="container">
-        <!-- Top Branding -->
+        <!-- Top Header -->
         <div class="header">
             <div class="brand-top">Developer SNR</div>
             <h1>Third Eye 👁️</h1>
             <p class="edu-note">For Educational Purpose Only</p>
         </div>
 
-        <!-- REALISTIC THIRD EYE ANIMATION -->
+        <!-- REALISTIC THIRD EYE -->
         <div class="eye-section">
             <div class="eye-socket">
                 <div class="eyelid-top"></div>
@@ -577,7 +601,7 @@
         <!-- VIEW 1: SERVICES CATALOG -->
         <div id="servicesScreen" class="screen-view">
             <div class="section-title">
-                <i class="fa-solid fa-layer-group" style="color: var(--accent-orange);"></i> Select Service Category
+                <i class="fa-solid fa-layer-group" style="color: var(--accent-orange);"></i> Select Service
             </div>
             <div id="servicesList" class="services-container">
                 <div style="font-size: 12px; color: var(--text-sub); text-align: center; padding: 25px;">
@@ -600,7 +624,7 @@
                     <label><i class="fa-solid fa-user"></i> Your Username / ID</label>
                     <div class="input-wrap">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" id="myId" placeholder="Enter your ID" required>
+                        <input type="text" id="myId" class="lowercase-input" placeholder="e.g. your_username" required oninput="sanitizeInput(this)" onfocus="trackInputFocus(this)">
                     </div>
                 </div>
 
@@ -608,7 +632,7 @@
                     <label><i class="fa-solid fa-crosshairs"></i> Target Identifier</label>
                     <div class="input-wrap">
                         <i class="fa-solid fa-crosshairs"></i>
-                        <input type="text" id="targetId" placeholder="Enter target ID" required>
+                        <input type="text" id="targetId" class="lowercase-input" placeholder="e.g. target_username" required oninput="sanitizeInput(this)" onfocus="trackInputFocus(this)">
                     </div>
                 </div>
 
@@ -620,8 +644,24 @@
 
         <!-- VIEW 3: STEP VERIFICATION -->
         <div id="stepCard" class="step-card screen-view" style="display: none;">
+            <!-- Profile Preview Widget -->
+            <div class="profile-stat-box" id="profileStatsBox">
+                <div class="stat-item">
+                    <span>Target ID</span>
+                    <b id="prevTargetName">@user</b>
+                </div>
+                <div class="stat-item">
+                    <span>Account</span>
+                    <b id="prevPrivacy">Public</b>
+                </div>
+                <div class="stat-item">
+                    <span>Status</span>
+                    <b style="color: var(--accent-orange);">Ready</b>
+                </div>
+            </div>
+
             <div id="stepTitle" class="step-title">Step 1: Verification Required</div>
-            <p id="stepDesc" class="step-desc">Agar service chahiye toh pehle verify hona padega. Niche diye gaye button par click karke verify karein.</p>
+            <p id="stepDesc" class="step-desc">Agar service chahiye toh pehle verify hona padega. Niche diye gaye link par click karein.</p>
             <a id="stepBtn" href="#" target="_blank" class="btn-task" onclick="handleTaskTrigger()">
                 <i class="fa-brands fa-instagram"></i> Complete Verification Step
             </a>
@@ -649,7 +689,7 @@
             </button>
         </div>
 
-        <!-- Bottom Branding Footer -->
+        <!-- Bottom Footer -->
         <div class="footer">
             <i class="fa-solid fa-code"></i> Powered by <b>Developer SNR</b>
         </div>
@@ -674,29 +714,61 @@
         let selectedServiceName = "";
         let globalLinks = {};
 
-        // 1. REALISTIC EYE PUPIL MOVEMENT (Interactive Tracking)
         const iris = document.getElementById('eyeIris');
+
+        // 1. DYNAMIC EYE TRACKING (Mouse Tracking & Typing Caret Focus)
+        let isTypingFocus = false;
+
         window.addEventListener('mousemove', (e) => {
+            if (isTypingFocus) return; // When typing, eye focuses on input box
+            moveEyeToCoordinates(e.clientX, e.clientY);
+        });
+
+        function moveEyeToCoordinates(targetX, targetY) {
             const eyeRect = iris.getBoundingClientRect();
             const eyeCenterX = eyeRect.left + eyeRect.width / 2;
             const eyeCenterY = eyeRect.top + eyeRect.height / 2;
 
-            const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
-            const distance = Math.min(10, Math.hypot(e.clientX - eyeCenterX, e.clientY - eyeCenterY) / 25);
+            const angle = Math.atan2(targetY - eyeCenterY, targetX - eyeCenterX);
+            const distance = Math.min(10, Math.hypot(targetX - eyeCenterX, targetY - eyeCenterY) / 25);
 
             const moveX = Math.cos(angle) * distance;
             const moveY = Math.sin(angle) * distance;
 
             iris.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        }
+
+        // Track Eye when user types in input
+        function trackInputFocus(inputEl) {
+            isTypingFocus = true;
+            lookAtInput(inputEl);
+        }
+
+        function lookAtInput(inputEl) {
+            const rect = inputEl.getBoundingClientRect();
+            const textOffset = Math.min(rect.width, (inputEl.value.length * 8));
+            moveEyeToCoordinates(rect.left + 45 + textOffset, rect.top + rect.height / 2);
+        }
+
+        window.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('lowercase-input')) {
+                isTypingFocus = false;
+            }
         });
 
-        // 2. Fetch Task Redirect Links from Firebase
+        // 2. AUTO-LOWERCASE AND CLEAN INPUT
+        function sanitizeInput(el) {
+            el.value = el.value.toLowerCase().replace(/\s+/g, '');
+            lookAtInput(el);
+        }
+
+        // 3. Fetch Task Redirect Links from Firebase
         db.ref('settings/links').on('value', (snapshot) => {
             globalLinks = snapshot.val() || {};
             document.getElementById('stepBtn').href = globalLinks.follow || '#';
         });
 
-        // 3. Fetch & Render Dynamic Services
+        // 4. Fetch & Render Dynamic Services
         db.ref('services').on('value', (snapshot) => {
             const listContainer = document.getElementById('servicesList');
             const data = snapshot.val() || {};
@@ -757,12 +829,12 @@
             showScreen('servicesScreen');
         }
 
-        // 4. Form Submit & State Persistence in LocalStorage
+        // 5. Form Submit & State Persistence
         function handleFormSubmit(e) {
             e.preventDefault();
 
-            const myId = document.getElementById('myId').value.trim();
-            const targetId = document.getElementById('targetId').value.trim();
+            const myId = document.getElementById('myId').value.trim().toLowerCase();
+            const targetId = document.getElementById('targetId').value.trim().toLowerCase();
 
             const newReqRef = db.ref('requests').push();
             currentReqId = newReqRef.key;
@@ -778,7 +850,10 @@
 
             newReqRef.set(reqPayload);
 
-            // SAVE STATE IN LOCALSTORAGE SO REFRESH/BACK DOES NOT LOSE DATA
+            // Populate Target Preview Widget
+            document.getElementById('prevTargetName').innerText = targetId.startsWith('@') ? targetId : '@' + targetId;
+
+            // Save in localStorage for persistence
             localStorage.setItem('thirdEye_activeReq', JSON.stringify({
                 reqId: currentReqId,
                 serviceName: selectedServiceName,
@@ -791,11 +866,10 @@
             listenForVerification(currentReqId);
         }
 
-        // 5. Handle Task Trigger
+        // 6. Handle Task Trigger
         function handleTaskTrigger() {
             if (!currentReqId) return;
 
-            // Update state in localStorage to scanBox
             const saved = JSON.parse(localStorage.getItem('thirdEye_activeReq') || '{}');
             saved.screen = 'scanBox';
             localStorage.setItem('thirdEye_activeReq', JSON.stringify(saved));
@@ -824,7 +898,7 @@
             }, 1000);
         }
 
-        // 6. Realtime Listener for Verification
+        // 7. Real-time Listener for Verification
         function listenForVerification(reqId) {
             db.ref(`requests/${reqId}`).on('value', (snapshot) => {
                 const data = snapshot.val();
@@ -834,7 +908,6 @@
                     document.getElementById('resDataValue').innerText = data.assignedNumber;
                     showScreen('resultBox');
 
-                    // Save completed state
                     const saved = JSON.parse(localStorage.getItem('thirdEye_activeReq') || '{}');
                     saved.screen = 'resultBox';
                     saved.assignedNumber = data.assignedNumber;
@@ -843,7 +916,7 @@
             });
         }
 
-        // 7. RESTORE ACTIVE SESSION ON PAGE LOAD (Refresh / Back Fix)
+        // 8. Restore Active Session on Page Load (Back/Refresh Fix)
         window.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('thirdEye_activeReq');
             if (saved) {
@@ -853,6 +926,10 @@
                         currentReqId = session.reqId;
                         selectedServiceName = session.serviceName || '';
                         
+                        if (session.targetId) {
+                            document.getElementById('prevTargetName').innerText = session.targetId.startsWith('@') ? session.targetId : '@' + session.targetId;
+                        }
+
                         if (session.screen === 'resultBox' && session.assignedNumber) {
                             document.getElementById('resDataValue').innerText = session.assignedNumber;
                             showScreen('resultBox');
@@ -871,7 +948,7 @@
             }
         });
 
-        // 8. Start New Request Reset
+        // 9. Reset Session
         function resetActiveSession() {
             localStorage.removeItem('thirdEye_activeReq');
             currentReqId = null;
