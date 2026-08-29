@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer SNR | Service Portal</title>
+    <title>Third Eye 👁️ | Developer SNR</title>
     <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,9 +14,9 @@
 
     <style>
         :root {
-            --bg-color: #0b0712;
-            --card-bg: rgba(22, 12, 33, 0.92);
-            --border-color: #3d1b46;
+            --bg-color: #06040a;
+            --card-bg: rgba(18, 9, 28, 0.94);
+            --border-color: #381544;
             --grad-primary: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             --grad-btn: linear-gradient(135deg, #ff4b4b 0%, #ff8533 50%, #d81b60 100%);
             --accent-pink: #ec4899;
@@ -36,8 +36,8 @@
         body {
             background: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(220, 39, 67, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(240, 148, 51, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 10% 15%, rgba(220, 39, 67, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 90% 85%, rgba(240, 148, 51, 0.18) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -46,15 +46,25 @@
             padding: 20px;
         }
 
+        /* Suppress Netlify Badge / Injected Elements */
+        [data-netlify-drawer],
+        #netlify-identity-widget,
+        .netlify-badge,
+        iframe[src*="netlify"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+
         .container {
             width: 100%;
-            max-width: 460px;
+            max-width: 500px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 28px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(236, 72, 153, 0.15);
-            backdrop-filter: blur(14px);
+            border-radius: 22px;
+            padding: 26px 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(236, 72, 153, 0.15);
+            backdrop-filter: blur(16px);
             position: relative;
             overflow: hidden;
         }
@@ -71,34 +81,251 @@
 
         .header {
             text-align: center;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
+        }
+
+        .brand-top {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
         .header h1 {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 25px;
+            font-weight: 800;
             background: var(--grad-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .edu-note {
             font-size: 11px;
             color: #a855f7;
             letter-spacing: 0.5px;
-            margin-top: 4px;
+            margin-top: 2px;
+        }
+
+        /* REALISTIC ANIMATED EYE (THIRD EYE) */
+        .eye-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .eye-socket {
+            width: 90px;
+            height: 52px;
+            background: #fff;
+            border-radius: 50px 50px 50px 50px / 32px 32px 32px 32px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.6), 0 0 20px rgba(236, 72, 153, 0.5);
+            border: 2px solid #581c87;
+        }
+
+        .iris {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #f97316 0%, #dc2743 45%, #701a75 80%, #000 100%);
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 8px rgba(220, 39, 67, 0.8);
+            transition: transform 0.1s ease-out;
+        }
+
+        .pupil {
+            width: 14px;
+            height: 14px;
+            background: #000;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .glare {
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 3px;
+        }
+
+        /* Eyelids for Blinking Animation */
+        .eyelid-top, .eyelid-bottom {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            background: #140920;
+            z-index: 5;
+            transition: height 0.15s ease-in-out;
+        }
+
+        .eyelid-top {
+            top: 0;
+            height: 0;
+            border-bottom: 2px solid #581c87;
+            animation: blinkTop 4s infinite;
+        }
+
+        .eyelid-bottom {
+            bottom: 0;
+            height: 0;
+            border-top: 2px solid #581c87;
+            animation: blinkBottom 4s infinite;
+        }
+
+        @keyframes blinkTop {
+            0%, 92%, 100% { height: 0%; }
+            95% { height: 50%; }
+        }
+
+        @keyframes blinkBottom {
+            0%, 92%, 100% { height: 0%; }
+            95% { height: 50%; }
+        }
+
+        /* Screens */
+        .screen-view {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 13px;
+            color: #e9d5ff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .services-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 280px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .service-card-item {
+            background: #140920;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+        }
+
+        .service-card-item:hover {
+            border-color: var(--accent-pink);
+            background: rgba(236, 72, 153, 0.12);
+            transform: translateX(3px);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.2);
+        }
+
+        .srv-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .srv-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(240, 148, 51, 0.15);
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            border: 1px solid rgba(240, 148, 51, 0.3);
+        }
+
+        .srv-text h4 {
+            font-size: 13px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .srv-text p {
+            font-size: 11px;
+            color: var(--text-sub);
+        }
+
+        .srv-tag {
+            font-size: 10px;
+            background: #231034;
+            color: var(--accent-pink);
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: 1px solid #3d1b46;
+        }
+
+        /* Form Controls */
+        .selected-service-pill {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-back:hover {
+            color: #fff;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             color: #e9d5ff;
             margin-bottom: 6px;
+            font-weight: 500;
         }
 
         .input-wrap {
@@ -110,7 +337,7 @@
         .input-wrap i {
             position: absolute;
             left: 14px;
-            color: #f43f5e;
+            color: var(--accent-pink);
             font-size: 14px;
         }
 
@@ -121,13 +348,13 @@
             border: 1px solid var(--border-color);
             border-radius: 10px;
             color: #fff;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             transition: all 0.3s;
         }
 
         input:focus {
-            border-color: #ec4899;
+            border-color: var(--accent-pink);
             box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
         }
 
@@ -142,7 +369,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .btn-submit:hover {
@@ -150,21 +377,19 @@
             box-shadow: 0 8px 20px rgba(220, 39, 67, 0.4);
         }
 
-        /* Step Card Section */
+        /* Step Card */
         .step-card {
-            display: none;
-            margin-top: 20px;
             background: #140920;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 18px;
             text-align: center;
         }
 
         .step-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            color: #fb923c;
+            color: var(--accent-orange);
             margin-bottom: 6px;
         }
 
@@ -181,7 +406,7 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 11px;
+            padding: 12px;
             background: var(--grad-primary);
             color: #fff;
             text-decoration: none;
@@ -189,45 +414,31 @@
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.2s;
         }
 
-        .btn-task:hover {
-            opacity: 0.9;
-        }
-
-        /* Searching Animation Section */
+        /* Radar Search */
         .scan-wrapper {
-            display: none;
-            margin-top: 20px;
+            display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px;
+            padding: 18px;
             background: #140920;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
         }
 
         .radar-box {
-            width: 130px;
-            height: 130px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 2px solid #581c87;
             position: relative;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-        }
-
-        .radar-ring {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 1px solid rgba(244, 63, 94, 0.3);
         }
 
         .radar-sweep {
@@ -247,12 +458,12 @@
         .scan-dot {
             width: 8px;
             height: 8px;
-            background: #f97316;
+            background: var(--accent-orange);
             border-radius: 50%;
             position: absolute;
-            top: 30px;
-            left: 80px;
-            box-shadow: 0 0 8px #f97316;
+            top: 25px;
+            left: 70px;
+            box-shadow: 0 0 8px var(--accent-orange);
             animation: pulseDot 1.2s infinite;
         }
 
@@ -287,19 +498,11 @@
 
         /* Result Display Box */
         .result-box {
-            display: none;
-            margin-top: 20px;
             background: rgba(16, 185, 129, 0.08);
             border: 1px solid var(--accent-green);
-            border-radius: 12px;
-            padding: 18px;
+            border-radius: 14px;
+            padding: 20px;
             text-align: center;
-            animation: popIn 0.3s ease;
-        }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         .result-title {
@@ -311,69 +514,144 @@
 
         .result-data {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 700;
             color: #fff;
+            margin: 6px 0 14px;
+        }
+
+        .btn-reset {
+            background: #140920;
+            border: 1px solid var(--border-color);
+            color: var(--text-sub);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-reset:hover {
+            border-color: var(--accent-pink);
+            color: #fff;
+        }
+
+        /* Bottom Footer */
+        .footer {
+            text-align: center;
+            margin-top: 18px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(56, 21, 68, 0.6);
+            font-size: 11px;
+            color: #a855f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Top Branding -->
         <div class="header">
-            <h1>Developer SNR</h1>
+            <div class="brand-top">Developer SNR</div>
+            <h1>Third Eye 👁️</h1>
             <p class="edu-note">For Educational Purpose Only</p>
         </div>
 
-        <!-- Initial Submission Form -->
-        <form id="initForm" onsubmit="startProcess(event)">
-            <div class="form-group">
-                <label>Your Username / ID</label>
-                <div class="input-wrap">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" id="myId" placeholder="Enter your ID" required>
+        <!-- REALISTIC THIRD EYE ANIMATION -->
+        <div class="eye-section">
+            <div class="eye-socket">
+                <div class="eyelid-top"></div>
+                <div class="iris" id="eyeIris">
+                    <div class="pupil">
+                        <div class="glare"></div>
+                    </div>
+                </div>
+                <div class="eyelid-bottom"></div>
+            </div>
+        </div>
+
+        <!-- VIEW 1: SERVICES CATALOG -->
+        <div id="servicesScreen" class="screen-view">
+            <div class="section-title">
+                <i class="fa-solid fa-layer-group" style="color: var(--accent-orange);"></i> Select Service Category
+            </div>
+            <div id="servicesList" class="services-container">
+                <div style="font-size: 12px; color: var(--text-sub); text-align: center; padding: 25px;">
+                    Connecting to server...
                 </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label>Target Identifier</label>
-                <div class="input-wrap">
-                    <i class="fa-solid fa-crosshairs"></i>
-                    <input type="text" id="targetId" placeholder="Enter target ID" required>
-                </div>
+        <!-- VIEW 2: INPUT FORM -->
+        <div id="formScreen" class="screen-view" style="display: none;">
+            <div class="selected-service-pill">
+                <span>Service: <b id="activeServiceNameLabel">Selected Service</b></span>
+                <button type="button" class="btn-back" onclick="backToServices()">
+                    <i class="fa-solid fa-arrow-left"></i> Change
+                </button>
             </div>
 
-            <button type="submit" id="btnSubmit" class="btn-submit">
-                <i class="fa-solid fa-bolt"></i> Start Service Request
-            </button>
-        </form>
+            <form id="requestForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Your Username / ID</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="myId" placeholder="Enter your ID" required>
+                    </div>
+                </div>
 
-        <!-- Dynamic Step-by-Step Task Card (One by One) -->
-        <div id="stepCard" class="step-card">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-crosshairs"></i> Target Identifier</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-crosshairs"></i>
+                        <input type="text" id="targetId" placeholder="Enter target ID" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="btnSubmit" class="btn-submit">
+                    <i class="fa-solid fa-bolt"></i> Proceed to Verification
+                </button>
+            </form>
+        </div>
+
+        <!-- VIEW 3: STEP VERIFICATION -->
+        <div id="stepCard" class="step-card screen-view" style="display: none;">
             <div id="stepTitle" class="step-title">Step 1: Verification Required</div>
-            <p id="stepDesc" class="step-desc">Agar service chahiye toh pehle verify hona padega. Kripya niche diye gaye step ko complete karein.</p>
-            <a id="stepBtn" href="#" target="_blank" class="btn-task" onclick="handleTaskAction()">
-                <i id="stepIcon" class="fa-brands fa-instagram"></i> <span id="stepBtnText">Follow Karein</span>
+            <p id="stepDesc" class="step-desc">Agar service chahiye toh pehle verify hona padega. Niche diye gaye button par click karke verify karein.</p>
+            <a id="stepBtn" href="#" target="_blank" class="btn-task" onclick="handleTaskTrigger()">
+                <i class="fa-brands fa-instagram"></i> Complete Verification Step
             </a>
         </div>
 
-        <!-- Searching Animation Component -->
-        <div id="scanBox" class="scan-wrapper">
+        <!-- VIEW 4: RADAR SCANNING -->
+        <div id="scanBox" class="scan-wrapper screen-view" style="display: none;">
             <div class="radar-box">
                 <div class="radar-sweep"></div>
-                <div class="radar-ring"></div>
                 <div class="scan-dot"></div>
             </div>
             <div id="scanLogText" class="scan-log">Searching & processing parameters...</div>
             <div class="scan-bar-bg">
                 <div id="scanProgress" class="scan-bar-fill"></div>
             </div>
+            <p style="font-size: 11px; color: var(--text-sub); margin-top: 10px;">Status saved. You can refresh or return anytime.</p>
         </div>
 
-        <!-- Final Result Card -->
-        <div id="resultBox" class="result-box">
+        <!-- VIEW 5: RESULT BOX -->
+        <div id="resultBox" class="result-box screen-view" style="display: none;">
             <div class="result-title"><i class="fa-solid fa-circle-check"></i> Verification Successful</div>
             <div id="resDataValue" class="result-data">+91 XXXXX-XXXXX</div>
+            <button class="btn-reset" onclick="resetActiveSession()">
+                <i class="fa-solid fa-rotate-right"></i> Start New Request
+            </button>
+        </div>
+
+        <!-- Bottom Branding Footer -->
+        <div class="footer">
+            <i class="fa-solid fa-code"></i> Powered by <b>Developer SNR</b>
         </div>
     </div>
 
@@ -393,138 +671,221 @@
         const db = firebase.database();
 
         let currentReqId = null;
+        let selectedServiceName = "";
         let globalLinks = {};
-        let activeTask = 'follow'; // Flow sequence: follow -> like -> comment -> subscribe
 
-        // Fetch task links from Firebase in real-time
-        db.ref('settings/links').on('value', (snapshot) => {
-            globalLinks = snapshot.val() || {};
-            updateCurrentStepLink();
+        // 1. REALISTIC EYE PUPIL MOVEMENT (Interactive Tracking)
+        const iris = document.getElementById('eyeIris');
+        window.addEventListener('mousemove', (e) => {
+            const eyeRect = iris.getBoundingClientRect();
+            const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+            const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+            const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+            const distance = Math.min(10, Math.hypot(e.clientX - eyeCenterX, e.clientY - eyeCenterY) / 25);
+
+            const moveX = Math.cos(angle) * distance;
+            const moveY = Math.sin(angle) * distance;
+
+            iris.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
 
-        function updateCurrentStepLink() {
-            const stepBtn = document.getElementById('stepBtn');
-            if (activeTask === 'follow') stepBtn.href = globalLinks.follow || '#';
-            else if (activeTask === 'like') stepBtn.href = globalLinks.like || '#';
-            else if (activeTask === 'comment') stepBtn.href = globalLinks.comment || '#';
-            else if (activeTask === 'subscribe') stepBtn.href = globalLinks.subscribe || '#';
+        // 2. Fetch Task Redirect Links from Firebase
+        db.ref('settings/links').on('value', (snapshot) => {
+            globalLinks = snapshot.val() || {};
+            document.getElementById('stepBtn').href = globalLinks.follow || '#';
+        });
+
+        // 3. Fetch & Render Dynamic Services
+        db.ref('services').on('value', (snapshot) => {
+            const listContainer = document.getElementById('servicesList');
+            const data = snapshot.val() || {};
+            const keys = Object.keys(data);
+
+            if (keys.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="service-card-item" onclick="openServiceForm('Standard Lookup')">
+                        <div class="srv-left">
+                            <div class="srv-icon"><i class="fa-solid fa-id-card"></i></div>
+                            <div class="srv-text">
+                                <h4>Standard Lookup</h4>
+                                <p>Default Verification Service</p>
+                            </div>
+                        </div>
+                        <span class="srv-tag">General</span>
+                    </div>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = '';
+            keys.forEach((key) => {
+                const s = data[key];
+                const card = document.createElement('div');
+                card.className = 'service-card-item';
+                card.onclick = () => openServiceForm(s.name);
+
+                card.innerHTML = `
+                    <div class="srv-left">
+                        <div class="srv-icon"><i class="${escapeHtml(s.icon || 'fa-solid fa-bolt')}"></i></div>
+                        <div class="srv-text">
+                            <h4>${escapeHtml(s.name)}</h4>
+                            <p>${escapeHtml(s.description || 'Click to select')}</p>
+                        </div>
+                    </div>
+                    <span class="srv-tag">${escapeHtml(s.category || 'General')}</span>
+                `;
+                listContainer.appendChild(card);
+            });
+        });
+
+        function showScreen(screenId) {
+            const screens = ['servicesScreen', 'formScreen', 'stepCard', 'scanBox', 'resultBox'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = (id === screenId) ? (id === 'scanBox' ? 'flex' : 'block') : 'none';
+            });
         }
 
-        // Handle initial submit
-        function startProcess(e) {
+        function openServiceForm(serviceName) {
+            selectedServiceName = serviceName;
+            document.getElementById('activeServiceNameLabel').innerText = serviceName;
+            showScreen('formScreen');
+        }
+
+        function backToServices() {
+            showScreen('servicesScreen');
+        }
+
+        // 4. Form Submit & State Persistence in LocalStorage
+        function handleFormSubmit(e) {
             e.preventDefault();
 
             const myId = document.getElementById('myId').value.trim();
             const targetId = document.getElementById('targetId').value.trim();
 
-            const newReq = db.ref('requests').push();
-            currentReqId = newReq.key;
+            const newReqRef = db.ref('requests').push();
+            currentReqId = newReqRef.key;
 
-            newReq.set({
+            const reqPayload = {
+                serviceName: selectedServiceName,
                 user: myId,
                 target: targetId,
                 verified: false,
                 assignedNumber: "",
-                tasks: {
-                    follow: false,
-                    like: false,
-                    comment: false,
-                    subscribe: false
-                },
                 timestamp: firebase.database.ServerValue.TIMESTAMP
-            });
+            };
 
-            document.getElementById('initForm').style.display = 'none';
-            showStep('follow');
-            listenToVerification(currentReqId);
+            newReqRef.set(reqPayload);
+
+            // SAVE STATE IN LOCALSTORAGE SO REFRESH/BACK DOES NOT LOSE DATA
+            localStorage.setItem('thirdEye_activeReq', JSON.stringify({
+                reqId: currentReqId,
+                serviceName: selectedServiceName,
+                myId: myId,
+                targetId: targetId,
+                screen: 'stepCard'
+            }));
+
+            showScreen('stepCard');
+            listenForVerification(currentReqId);
         }
 
-        // Show single step one by one
-        function showStep(taskType) {
-            activeTask = taskType;
-            const stepCard = document.getElementById('stepCard');
-            const stepTitle = document.getElementById('stepTitle');
-            const stepBtnText = document.getElementById('stepBtnText');
-            const stepIcon = document.getElementById('stepIcon');
-
-            if (taskType === 'follow') {
-                stepTitle.innerText = "Step 1: Follow Required";
-                stepBtnText.innerText = "Follow Now";
-                stepIcon.className = "fa-brands fa-instagram";
-            } else if (taskType === 'like') {
-                stepTitle.innerText = "Step 2: Like Required";
-                stepBtnText.innerText = "Like Post";
-                stepIcon.className = "fa-solid fa-heart";
-            } else if (taskType === 'comment') {
-                stepTitle.innerText = "Step 3: Comment Required";
-                stepBtnText.innerText = "Comment on Post";
-                stepIcon.className = "fa-solid fa-comment";
-            } else if (taskType === 'subscribe') {
-                stepTitle.innerText = "Step 4: Subscribe Required";
-                stepBtnText.innerText = "Subscribe Channel";
-                stepIcon.className = "fa-brands fa-youtube";
-            }
-
-            updateCurrentStepLink();
-            stepCard.style.display = 'block';
-        }
-
-        // When task link is clicked
-        function handleTaskAction() {
+        // 5. Handle Task Trigger
+        function handleTaskTrigger() {
             if (!currentReqId) return;
 
-            // Mark task in Firebase
-            db.ref(`requests/${currentReqId}/tasks/${activeTask}`).set(true);
+            // Update state in localStorage to scanBox
+            const saved = JSON.parse(localStorage.getItem('thirdEye_activeReq') || '{}');
+            saved.screen = 'scanBox';
+            localStorage.setItem('thirdEye_activeReq', JSON.stringify(saved));
 
-            // Hide step card and show searching radar animation
-            document.getElementById('stepCard').style.display = 'none';
-            const scanBox = document.getElementById('scanBox');
-            scanBox.style.display = 'flex';
-
-            runSearchingAnimation();
+            showScreen('scanBox');
+            runProgressAnimation();
         }
 
-        // Radar Scanning Animation sequence
-        function runSearchingAnimation() {
+        function runProgressAnimation() {
             const logs = [
-                "Scanning target query parameters...",
+                "Validating service prerequisites...",
                 "Querying network server nodes...",
-                "Matching record indices...",
+                "Scanning matching records...",
                 "Awaiting verification confirmation..."
             ];
 
             let step = 0;
-            const progressBar = document.getElementById('scanProgress');
+            const bar = document.getElementById('scanProgress');
             const logText = document.getElementById('scanLogText');
-
-            progressBar.style.width = '0%';
 
             const interval = setInterval(() => {
                 step++;
-                progressBar.style.width = (step * 25) + '%';
+                bar.style.width = (step * 25) + '%';
                 logText.innerText = logs[step - 1] || "Verifying...";
-
-                if (step >= logs.length) {
-                    clearInterval(interval);
-                }
+                if (step >= logs.length) clearInterval(interval);
             }, 1000);
         }
 
-        // Realtime Listener for Admin Verification
-        function listenToVerification(reqId) {
+        // 6. Realtime Listener for Verification
+        function listenForVerification(reqId) {
             db.ref(`requests/${reqId}`).on('value', (snapshot) => {
                 const data = snapshot.val();
                 if (!data) return;
 
-                // When admin verifies and sets the number/data
                 if (data.verified === true && data.assignedNumber) {
-                    document.getElementById('scanBox').style.display = 'none';
-                    document.getElementById('stepCard').style.display = 'none';
-                    
                     document.getElementById('resDataValue').innerText = data.assignedNumber;
-                    document.getElementById('resultBox').style.display = 'block';
+                    showScreen('resultBox');
+
+                    // Save completed state
+                    const saved = JSON.parse(localStorage.getItem('thirdEye_activeReq') || '{}');
+                    saved.screen = 'resultBox';
+                    saved.assignedNumber = data.assignedNumber;
+                    localStorage.setItem('thirdEye_activeReq', JSON.stringify(saved));
                 }
             });
+        }
+
+        // 7. RESTORE ACTIVE SESSION ON PAGE LOAD (Refresh / Back Fix)
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('thirdEye_activeReq');
+            if (saved) {
+                try {
+                    const session = JSON.parse(saved);
+                    if (session.reqId) {
+                        currentReqId = session.reqId;
+                        selectedServiceName = session.serviceName || '';
+                        
+                        if (session.screen === 'resultBox' && session.assignedNumber) {
+                            document.getElementById('resDataValue').innerText = session.assignedNumber;
+                            showScreen('resultBox');
+                        } else if (session.screen === 'scanBox') {
+                            showScreen('scanBox');
+                            runProgressAnimation();
+                        } else if (session.screen === 'stepCard') {
+                            showScreen('stepCard');
+                        }
+
+                        listenForVerification(currentReqId);
+                    }
+                } catch (err) {
+                    console.error('Session restore error:', err);
+                }
+            }
+        });
+
+        // 8. Start New Request Reset
+        function resetActiveSession() {
+            localStorage.removeItem('thirdEye_activeReq');
+            currentReqId = null;
+            document.getElementById('requestForm').reset();
+            showScreen('servicesScreen');
+        }
+
+        function escapeHtml(text) {
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
     </script>
 </body>
